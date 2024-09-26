@@ -114,66 +114,89 @@ const Manager = () => {
             <ToastContainer />
 
 
-        <div className=' flex flex-col justify-center items-center mx-auto text-white my-20 max-w-5xl  '>
-            
-            <div className="main-text flex-col justify-center items-center gap-2 my-3">
-                <div className='text-center font-semibold text-3xl flex justify-center items-center '>
-                    <RiLockStarLine />
-                    <span>Pass</span><span className='text-gray-400'>HOLD</span></div>
-                <div><span className='text-sm text-gray-400 text-center'>Your Strong-Hold For Passwords</span></div>
-            </div>
-            <div className="inputs flex flex-col justify-center items-center gap-3 w-full">
-                <div className="url w-full ">
-                    <input onChange={handleChange} value={form.site} placeholder='Enter URL' className='rounded-full w-full text-black p-3 py-1' type="text" name="site" id="site" />
-                </div>
-                <div className="up flex gap-4 w-full ">
-                    <div className='w-full'>
-                        <input onChange={handleChange} value={form.username} placeholder='Enter Username' className='w-full rounded-full text-black p-3 py-1' type="text" name='username' id='username' />
-                    </div>
-                    <div className=''>
-                        <input onChange={handleChange} value={form.password} placeholder='Enter Password' className=' w-full rounded-full text-black p-3 py-1 ' type={isPasswordVisible ? "text" : "password"} ref={ref} name='password' id='password' />
-                        <span onClick={showPassword}>
-                            {isPasswordVisible ? (<FaRegEyeSlash className='relative left-36 bottom-[1.45rem] text-gray-800 cursor-pointer' />) :
-                                (<FaRegEye className='relative left-36 bottom-[1.45rem] text-gray-800 cursor-pointer ' />)}
+            <div className='flex flex-col justify-center items-center mx-auto text-white my-20 max-w-5xl px-4 sm:px-6 lg:px-8'>
+  <div className="main-text flex flex-col justify-center items-center gap-2 my-3">
+    <div className='text-center font-semibold text-2xl sm:text-3xl flex justify-center items-center'>
+      <RiLockStarLine />
+      <span>Pass</span><span className='text-gray-400'>HOLD</span>
+    </div>
+    <div><span className='text-sm sm:text-base text-gray-400 text-center'>Your Strong-Hold For Passwords</span></div>
+  </div>
 
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <button onClick={savePassword} className="save bg-gray-600 border  my-6 py-1 px-5 mx-3 rounded-full flex justify-center  gap-1 items-center text-base"><RiFileLockLine />Save</button>
-            </div>
-            <div className="passwords w-full">
-                <h2 className=' py-3 font-semibold text-lg text-[#ced1d3]'>Your Passwords</h2>
-                {passwordArray.length === 0 && <div>No passwords to show</div>}
-                {passwordArray.length != 0 && <table className="table-auto w-full mt-2 rounded-md overflow-hidden">
-                    <thead className='bg-[#171722] text-white'>
-                        <tr>
-                            <th className='py-2'>Site</th>
-                            <th className='py-2'>Username</th>
-                            <th className='py-2'>Password</th>
-                            <th className='py-2'>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody className='bg-[#0A0A0A]  w-full'>
-                        {passwordArray.map((item, index) => {
-                            return <tr key={index}>
-                                <td className='text-center w-32 py-2 border border-gray-800 overflow-hidden'> <div className='flex justify-center items-center w-full gap-2' ><a href={item.site} target="_blank"> {item.site}</a><IoCopy onClick={() => { copyText(item.site) }} className=' cursor-pointer' /></div>  </td>
-                                <td className='text-center w-32 py-2 border border-gray-800 overflow-hidden'> <div className='flex justify-center items-center w-full gap-2'>{item.username} <IoCopy onClick={() => { copyText(item.username) }} className='cursor-pointer' /></div>  </td>
-                                <td className='text-center w-32 py-2 border border-gray-800 overflow-hidden'> <div className='flex justify-center items-center w-full gap-2'>{item.password} <IoCopy onClick={() => { copyText(item.password) }} className='cursor-pointer' /></div>  </td>
-                                <td className='text-center w-32 py-2 border border-gray-800 overflow-hidden'>
-                                    <div className='flex justify-center items-center gap-6'>
-                                        <CiEdit onClick={()=>{editPassword(item.id)}} className=' cursor-pointer w-5 h-5' />
-                                        <MdDeleteOutline onClick={()=>{deletePassword(item.id)}} className=' cursor-pointer w-5 h-5' />
-                                    </div>
-                                </td>
-                            </tr>
-                        })}
+  <div className="inputs flex flex-col justify-center items-center gap-3 w-full">
+    <div className="url w-full">
+      <input onChange={handleChange} value={form.site} placeholder='Enter URL' className='rounded-full w-full text-black p-2 sm:p-3' type="text" name="site" />
+    </div>
+    <div className="up flex flex-col sm:flex-row gap-4 w-full">
+      <div className='w-full'>
+        <input onChange={handleChange} value={form.username} placeholder='Enter Username' className='w-full rounded-full text-black p-2 sm:p-3' type="text" name='username' />
+      </div>
+      <div className='w-full '>
+        <div className='flex gap-2 justify-center items-center'>
+        <input onChange={handleChange} value={form.password} placeholder='Enter Password' className='w-full rounded-full text-black p-2 sm:p-3' type={isPasswordVisible ? "text" : "password"} ref={ref} name='password' />
+        <span className='bg-white rounded-[40%] px-1 py-1' onClick={showPassword}>
+          {isPasswordVisible ? (<FaRegEyeSlash className=' text-gray-800 cursor-pointer' />) :
+            (<FaRegEye className=' text-gray-800 cursor-pointer' />)}
+        </span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                    </tbody>
-                </table>}
-            </div>
-            </div>
+  <div>
+    <button onClick={savePassword} className="save bg-gray-600 border my-6 py-1 px-5 mx-3 rounded-full flex justify-center gap-1 items-center text-sm sm:text-base">
+      <RiFileLockLine />Save
+    </button>
+  </div>
+
+  <div className="passwords w-full">
+    <h2 className='py-3 font-semibold text-lg text-[#ced1d3]'>Your Passwords</h2>
+    {passwordArray.length === 0 && <div>No passwords to show</div>}
+    {passwordArray.length !== 0 && (
+      <table className="table-auto w-full mt-2 rounded-md overflow-hidden">
+        <thead className='bg-[#171722] text-white'>
+          <tr>
+            <th className='py-2 text-xs sm:text-base'>Site</th>
+            <th className='py-2 text-xs sm:text-base'>Username</th>
+            <th className='py-2 text-xs sm:text-base'>Password</th>
+            <th className='py-2 text-xs sm:text-base'>Actions</th>
+          </tr>
+        </thead>
+        <tbody className='bg-[#0A0A0A]'>
+          {passwordArray.map((item, index) => (
+            <tr key={index}>
+              <td className='text-center py-2 border border-gray-800 text-xs sm:text-base overflow-hidden'>
+                <div className='flex justify-center items-center gap-2'>
+                  <a href={item.site} target="_blank">{item.site}</a>
+                  <IoCopy onClick={() => { copyText(item.site) }} className='cursor-pointer' />
+                </div>
+              </td>
+              <td className='text-center py-2 border border-gray-800 text-xs sm:text-base overflow-hidden'>
+                <div className='flex justify-center items-center gap-2'>
+                  {item.username}
+                  <IoCopy onClick={() => { copyText(item.username) }} className='cursor-pointer' />
+                </div>
+              </td>
+              <td className='text-center py-2 border border-gray-800 text-xs sm:text-base overflow-hidden'>
+                <div className='flex justify-center items-center gap-2'>
+                  {item.password}
+                  <IoCopy onClick={() => { copyText(item.password) }} className='cursor-pointer' />
+                </div>
+              </td>
+              <td className='text-center py-2 border border-gray-800'>
+                <div className='flex justify-center items-center gap-4 sm:gap-6'>
+                  <CiEdit onClick={() => { editPassword(item.id) }} className='cursor-pointer w-4 h-4 sm:w-5 sm:h-5' />
+                  <MdDeleteOutline onClick={() => { deletePassword(item.id) }} className='cursor-pointer w-4 h-4 sm:w-5 sm:h-5' />
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    )}
+  </div>
+</div>
+
         </>
     )
 }
